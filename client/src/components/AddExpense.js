@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './AddExpense.css';
 
 const AddExpense = () => {
@@ -8,13 +9,34 @@ const AddExpense = () => {
     amount: "",
     date: ""
   });
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    console.log(expense); // Just use for testing delete soon
+    axios.post('http://localhost:4000/api/expenses', expense)
+    .then(response =>  {
+      setExpense({
+        name: "",
+        category: "",
+        amount: "",
+        date: ""
+    });
+    setSuccessMessage("Expense added successfully!");
+    setTimeout(() => {
+      setSuccessMessage("");
+  }, 3000);
+    })
+    .catch(err=> console.log(err))
+
   };
   
   return (
+    <>
+    {successMessage && (
+        <div style={{ color: "green", marginBottom: "10px" }}>
+            {successMessage}
+        </div>
+    )}
     <form onSubmit={handleSubmit}>
       <label>Name:</label>
         <input 
@@ -56,6 +78,7 @@ const AddExpense = () => {
 
         <button>Add Expense</button>
     </form>
+    </>
   )
 }
 

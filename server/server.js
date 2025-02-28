@@ -5,7 +5,7 @@ const app = express();
 const port = 4000;
 app.use(express.json());
 app.use(cors());
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 
 const expenseRoutes = require('./routes/expenses');
 

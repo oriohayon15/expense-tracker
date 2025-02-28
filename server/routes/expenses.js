@@ -5,9 +5,10 @@ const Expense = require('../models/Expense');
 router.post('/', async (req, res) => {
     try {
     const newExpense = new Expense({
-        Name: req.body.Name,
-        Category: req.body.Category,
-        Amount: req.body.Amount
+        name: req.body.name,
+        category: req.body.category,
+        amount: parseFloat(req.body.amount.replace(/[^0-9.]/g, '')),
+        date: req.body.date
     });
     await newExpense.save();
     res.status(200).json({message: 'Expense data saved succesfully!'});
