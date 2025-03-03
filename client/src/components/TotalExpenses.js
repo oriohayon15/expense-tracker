@@ -6,8 +6,8 @@ const TotalExpenses = ({expenses}) => {
     return (
         <div
         className='total-expenses'>
-            <h3>
-                Total Spent: ${totalAmount.toFixed(2)}
+            <h3 className='fw-bold fs-3 '>
+                 ${totalAmount.toFixed(2)}
             </h3>
         </div>
     );

@@ -32,54 +32,64 @@ const AddExpense = () => {
   
   return (
     <>
-    {successMessage && (
-        <div style={{ color: "green", marginBottom: "10px" }}>
-            {successMessage}
+      {successMessage && (
+        <div className="alert alert-success mb-3">{successMessage}</div>
+      )}
+  
+      <form onSubmit={handleSubmit} className="container p-4 border rounded shadow bg-light h-100 ">
+        <div className="mb-3">
+          <label className="form-label">Name:</label>
+          <input 
+            type="text"
+            className="form-control"
+            value={expense.name}
+            onChange={(e) => setExpense({...expense, name: e.target.value})}
+            required
+          />
         </div>
-    )}
-    <form onSubmit={handleSubmit}>
-      <label>Name:</label>
-        <input 
-        type="text"
-        value={expense.name}
-        onChange={(e) => setExpense({...expense, name: e.target.value})}
-        required
-        />
-        <label>Category:</label>
-        <select
-        value={expense.category}
-        onChange={(e) => setExpense({...expense, category: e.target.value})}
-        >
-        <option value="" disabled hidden>Select Category</option>
-        <option value="Food">Food</option>
-        <option value="Bills">Bills</option>
-        <option value="Entertainment">Entertainment</option>
-        <option value="Subscriptions">Subscriptions</option>
-        <option value="Other">Other</option>
-        </select>
-
-        <label>Amount:</label>
-
-        <input 
-        type="text"
-        value={expense.amount}
-        onChange={(e) => setExpense({...expense, amount: e.target.value})}
-        required
-        />
-
-        <label>Date:</label>
-
-        <input 
-        type="text"
-        value={expense.date}
-        onChange={(e) => setExpense({...expense, date: e.target.value})}
-        required
-        />
-
-        <button>Add Expense</button>
-    </form>
+  
+        <div className="mb-3">
+          <label className="form-label">Category:</label>
+          <select
+            className="form-select"
+            value={expense.category}
+            onChange={(e) => setExpense({...expense, category: e.target.value})}
+          >
+            <option value="" disabled hidden>Select Category</option>
+            <option value="Food">Food</option>
+            <option value="Bills">Bills</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Subscriptions">Subscriptions</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+  
+        <div className="mb-3">
+          <label className="form-label">Amount:</label>
+          <input 
+            type="text"
+            className="form-control"
+            value={expense.amount}
+            onChange={(e) => setExpense({...expense, amount: e.target.value})}
+            required
+          />
+        </div>
+  
+        <div className="mb-3">
+          <label className="form-label">Date:</label>
+          <input 
+            type="text"
+            className="form-control"
+            value={expense.date}
+            onChange={(e) => setExpense({...expense, date: e.target.value})}
+            required
+          />
+        </div>
+  
+        <button className="btn btn-primary w-100 fw-bold">Add Expense</button>
+      </form>
     </>
-  )
+  );
 }
 
 export default AddExpense
