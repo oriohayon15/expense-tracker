@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {auth} from '../firebase';
 import './AddExpense.css';
 
 const AddExpense = () => {
@@ -13,7 +14,16 @@ const AddExpense = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    axios.post('http://localhost:4000/api/expenses', expense)
+
+    const user = auth.currentUser;
+    if (!user) {
+      alert("You must be logged in to add an expense!");
+      return;
+    }
+
+    const newExpense = { ...expense, userId:user.uid };
+
+    axios.post('http://localhost:4000/api/expenses', newExpense)
     .then(response =>  {
       setExpense({
         name: "",
@@ -27,7 +37,6 @@ const AddExpense = () => {
   }, 3000);
     })
     .catch(err=> console.log(err))
-
   };
   
   return (

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {auth} from '../firebase';
+import { onAuthStateChanged } from "firebase/auth";
 import TotalExpenses from './TotalExpenses';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -10,14 +12,19 @@ const ExpenseList = () => {
     const [selectedCategory, setSelectedCategory] = useState('All'); 
     const [successMessage, setSuccessMessage] = useState("");
     useEffect(() => {
-        axios.get('http://localhost:4000/api/expenses')
-    .then(res => {
-        console.log(res);
-        setExpense(res.data);
-    }
-  )
-    .catch(err => {console.log(err)})
-    });
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+          axios.get(`http://localhost:4000/api/expenses?userId=${user.uid}`)
+            .then(res => {
+                console.log(res);
+                setExpense(res.data);
+            })
+            .catch(err => console.log(err));
+        }
+      });
+    
+      return () => unsubscribe(); 
+    }, [expense]);
     
     const handleDelete = async (_id) => {
       try {

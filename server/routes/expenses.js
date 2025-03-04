@@ -8,7 +8,8 @@ router.post('/', async (req, res) => {
         name: req.body.name,
         category: req.body.category,
         amount: parseFloat(req.body.amount.replace(/[^0-9.]/g, '')),
-        date: req.body.date
+        date: req.body.date,
+        userId: req.body.userId
     });
     await newExpense.save();
     res.status(200).json({message: 'Expense data saved succesfully!'});
@@ -19,7 +20,8 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async(req, res) => {
-    let expenses = await Expense.find();
+    const { userId } = req.query; 
+    let expenses = await Expense.find({ userId }); 
     res.status(200).send(expenses);
 });
 

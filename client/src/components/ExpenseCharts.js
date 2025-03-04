@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Pie } from 'react-chartjs-2';
 import axios from 'axios';
+import {auth} from '../firebase'
 import {
     Chart as ChartJS,
     ArcElement,
@@ -16,7 +17,10 @@ const ExpenseChart = ({ expenses }) => {
     useEffect(()=> {
         const fetchExpenses = async () => {
             try {
-                const res = await axios.get('http://localhost:4000/api/expenses');
+                const user = auth.currentUser; 
+                if (!user) return; 
+
+                const res = await axios.get(`http://localhost:4000/api/expenses?userId=${user.uid}`);
                 const expense = res.data;
 
                 const categories = ['Food', 'Bills', 'Entertainment', 'Subscriptions', 'Other']
