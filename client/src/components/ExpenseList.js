@@ -14,7 +14,7 @@ const ExpenseList = () => {
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
-          axios.get(`${process.env.REACT_APP_API_URL}/api/expenses?userId=${user.uid}`)
+          axios.get(`https://expense-tracker-sduf.onrender.com/api/expenses?userId=${user.uid}`)
             .then(res => {
                 console.log(res);
                 setExpense(res.data);
@@ -28,7 +28,7 @@ const ExpenseList = () => {
     
     const handleDelete = async (_id) => {
       try {
-        await axios.delete(`${process.env.REACT_APP_API_URL}/api/expenses?userId=${user.uid}`);
+        await axios.delete(`https://expense-tracker-sduf.onrender.com/api/expenses?userId=${_id}`);
         setExpense(expense.filter(expense => expense._id !== _id))
         setSuccessMessage("Expense deleted succesfully!");
       setTimeout(() => {
