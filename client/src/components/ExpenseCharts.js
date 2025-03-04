@@ -20,7 +20,7 @@ const ExpenseChart = ({ expenses }) => {
                 const user = auth.currentUser; 
                 if (!user) return; 
 
-                const res = await axios.get(`http://localhost:4000/api/expenses?userId=${user.uid}`);
+                const res = await axios.get(`https://expense-tracker-sduf.onrender.com/api/expenses?userId=${user.uid}`);
                 const expense = res.data;
 
                 const categories = ['Food', 'Bills', 'Entertainment', 'Subscriptions', 'Other']
