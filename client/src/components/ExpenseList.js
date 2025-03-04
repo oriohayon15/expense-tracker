@@ -28,7 +28,7 @@ const ExpenseList = () => {
     
     const handleDelete = async (_id) => {
       try {
-        await axios.delete(`https://expense-tracker-sduf.onrender.com/api/expenses?userId=${_id}`);
+        await axios.delete(`https://expense-tracker-sduf.onrender.com/api/expenses/${_id}`);
         setExpense(expense.filter(expense => expense._id !== _id))
         setSuccessMessage("Expense deleted succesfully!");
       setTimeout(() => {
