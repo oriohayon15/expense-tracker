@@ -28,7 +28,7 @@ const ExpenseList = () => {
     
     const handleDelete = async (_id) => {
       try {
-        await axios.delete(`http://localhost:4000/api/expenses/${_id}`);
+        await axios.delete(`${process.env.REACT_APP_API_URL}/api/expenses?userId=${user.uid}`);
         setExpense(expense.filter(expense => expense._id !== _id))
         setSuccessMessage("Expense deleted succesfully!");
       setTimeout(() => {
