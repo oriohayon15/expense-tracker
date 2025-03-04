@@ -23,7 +23,7 @@ const AddExpense = () => {
 
     const newExpense = { ...expense, userId:user.uid };
 
-    axios.post('https://expense-tracker-sduf.onrender.com/api/expenses', newExpense)
+    axios.post(`${process.env.REACT_APP_API_URL}/api/expenses`, newExpense)
     .then(response =>  {
       setExpense({
         name: "",

@@ -14,7 +14,7 @@ const ExpenseList = () => {
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
-          axios.get(`https://expense-tracker-sduf.onrender.com/api/expenses?userId=${user.uid}`)
+          axios.get(`${process.env.REACT_APP_API_URL}/api/expenses?userId=${user.uid}`)
             .then(res => {
                 console.log(res);
                 setExpense(res.data);
