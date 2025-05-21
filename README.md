@@ -22,7 +22,7 @@ Delete an expense if no longer needed.
 
 📌 If you don’t sign in, you can explore the app but you wont be able to add expenses.
 
-Author
+Developer
 Ori Ohayon
 https://www.linkedin.com/in/ori-ohayon/
 orioh15@gmail.com
