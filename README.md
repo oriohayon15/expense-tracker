@@ -15,6 +15,7 @@ Tech Stack
 🔹 Deployment: Render (Backend) & Netlify (Frontend)
 
 How to Use
+Live site: https://track-my-expenses-live.netlify.app/
 Sign in with Google to securely access your personal expense data.
 Add an expense by entering details (name, category, amount, date).
 View spending distribution via an interactive Pie Chart.
